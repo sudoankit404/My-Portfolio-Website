@@ -1,364 +1,608 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ankit Kumar - Developer & Security Researcher</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b1120">
+<meta name="description" content="Ankit Kumar — BCA Cyber Security student, Full-Stack Developer and aspiring Ethical Hacker. Portfolio, projects and resume.">
+<meta name="author" content="Ankit Kumar">
+<meta property="og:title" content="Ankit Kumar — Cyber Security & Full-Stack Developer">
+<meta property="og:description" content="BCA Cyber Security Enthusiast | Full-Stack Dev & Aspiring Ethical Hacker | Linux Explorer">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/156931696?v=4">
+<title>Ankit Kumar — Cyber Security Enthusiast & Full-Stack Developer</title>
+<link rel="icon" href="https://avatars.githubusercontent.com/u/156931696?v=4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="bg-animation"></div>
-    <!-- Navigation -->
+<div class="bg-grid"></div>
+<div class="bg-glow a"></div>
+<div class="bg-glow b"></div>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#home" class="brand">
+      <span class="mark">AK</span>
+      <span>Ankit Kumar<small class="mono">Security · Development</small></span>
+    </a>
     <nav>
-        <div class="nav-container">
-            <!-- <div class="logo"></div> -->
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home">HOME</a></li>
-                <li><a href="#about">ABOUT</a></li>
-                <li><a href="#projects">PROJECTS</a></li>
-                <li><a href="#contact">CONTACT</a></li>
-            </ul>
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#skills">SKILLS</a></li>
+        <li><a href="#projects">PROJECTS</a></li>
+        <li><a href="#resume">RESUME</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+      </ul>
     </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle colour theme" title="Toggle theme">
+        <svg id="themeIcon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="btn btn-primary desktop-cta" id="navResume" style="padding:.6rem 1.1rem;min-height:40px;font-size:.86rem">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Resume
+      </button>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
 
-    <!-- Hero Section -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about"><span class="num">01</span> ABOUT</a>
+  <a href="#skills"><span class="num">02</span> SKILLS</a>
+  <a href="#projects"><span class="num">03</span> PROJECTS</a>
+  <a href="#resume"><span class="num">04</span> RESUME</a>
+  <a href="#contact"><span class="num">05</span> CONTACT</a>
+  <button class="btn btn-primary" onclick="downloadResume()">Download Resume (PDF)</button>
+</div>
+
+<!-- ================= HERO ================= -->
 <section class="hero" id="home">
-    <div class="hero-content">
-        <div class="hero-text">
-            <div class="greeting">👋 Hello, I'm</div>
-            <h1 class="typing-name" id="typingName">ANKIT KUMAR</h1>
-            <h2 class="typing-designation" id="typingDesignation">CYBERSECURITY ENTHUSIAST AND WEB DEVELOPER</h2>
-            <p class="tagline">
-                    Passionate about cybersecurity, and building tools that make a difference. 
-                    Exploring the intersection of development and security to create safer digital experiences.
-                </p>
-                <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">
-                    <i class="fas fa-code"></i> View My Work
-                </a>
-                <a href="https://github.com/sudoankit404" class="btn btn-secondary" target="_blank">
-                    <i class="fab fa-github"></i> GitHub Profile
-                </a>
-            </div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="status"><span class="dot"></span> Available for internships &amp; freelance</span>
+        <h1>Ankit Kumar<br><span class="grad">Security &amp; Code.</span></h1>
+        <div class="role"><span id="typed"></span><span class="caret"></span></div>
+        <p class="lede">
+          BCA Cyber Security student building secure, well-engineered web applications —
+          and breaking them on purpose to learn how they fail. I work across
+          <strong style="color:var(--text)">web development, VAPT and Linux tooling</strong>.
+        </p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">
+            View Projects
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <button class="btn btn-ghost" onclick="downloadResume()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Resume
+          </button>
         </div>
-        <div class="hero-image">
-            <div class="profile-card">
-                <div class="profile-image">
-                    <img src="https://avatars.githubusercontent.com/u/sudoankit404?v=4" alt="Ankit Kumar" id="profileImage">
-                </div>
-                <div class="github-stats-mini">
-                    <div class="stat-mini">
-                        <div class="number" id="repoCount">-</div>
-                        <div class="label">Repositories</div>
-                    </div>
-                    <div class="stat-mini">
-                        <div class="number" id="followerCount">-</div>
-                        <div class="label">Followers</div>
-                    </div>
-                </div>
-            </div>
+        <div class="hero-socials">
+          <span class="sep"></span>
+          <a class="icon-btn" href="https://github.com/sudoankit404" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.4-1.27.73-1.56-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+          </a>
+          <a class="icon-btn" href="https://instagram.com/shrmankt" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a class="icon-btn" href="https://www.linkedin.com/in/sudoankit404" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.27a1.75 1.75 0 1 1 0-3.5 1.75 1.75 0 0 1 0 3.5zm13.5 12.27h-3v-5.6c0-3.37-4-3.11-4 0v5.6h-3v-11h3v1.77c1.4-2.59 7-2.78 7 2.47v6.76z"/></svg>
+          </a>
+          <a class="icon-btn" href="mailto:sudoankit404@gmail.com" aria-label="Email">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+          </a>
         </div>
+      </div>
+
+      <div class="portrait-wrap">
+        <div class="portrait">
+          <img src="https://avatars.githubusercontent.com/u/156931696?v=4" alt="Ankit Kumar" width="400" height="400">
+          <div class="portrait-tag"><span>@sudoankit404</span><span id="locTag">🐧 Linux</span></div>
+        </div>
+        <div class="portrait-frame"></div>
+        <div class="portrait-badge mono">BCA · Cyber Security</div>
+      </div>
     </div>
+
+
+  </div>
 </section>
 
-    <!-- About Section -->
-    <section id="about" class="fade-in">
-    <div class="section-header">
-        <h2 class="section-title">About Me</h2>
-            <p class="section-subtitle">Get to know more about my journey and expertise</p>
-        </div>
-        <div class="about-content">
-            <div class="about-text">
-                <p>
-                    I'm a <span class="highlight">Cybersecurity Enthusiast and Web Developer</span> with a passion for uncovering vulnerabilities 
-                    and building robust security solutions. My journey in tech has been driven by curiosity and the desire to 
-                    understand how systems work at their core.
-                </p>
-                <p>
-                    I specialize in <span class="highlight">Vulnerability Assessment and Penetration Testing(VAPT), and Tool Development</span>. 
-                    Through my work, My aim is to contribute to the cybersecurity community by creating tools that help security 
-                    professionals identify and mitigate risks.
-                </p>
-                <p>
-                    When I'm not researching security vulnerabilities or writing code, you can find me contributing to 
-                    open-source projects, learning new technologies, and sharing knowledge with the community.
-                </p>
-            </div><br>
-            <section class="fade-in">
-    <div class="section-header">
-        <h2 class="section-title">Technologies and Tools I work with</h2>
-                
-              <div class="all-skills-container">
-        <!-- Programming Languages -->
-        <div class="skill-category">
-            <h4><i class="fas fa-code"></i>Programming Languages</h4>
-            <div class="skills-grid">
-                <div class="skill-item">
-                     <i class="devicon-c-plain colored skill-logo"></i>
-                    <div class="skill-name">C</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-cplusplus-plain colored skill-logo"></i>
-                    <div class="skill-name">C++</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-csharp-plain colored skill-logo"></i>
-                    <div class="skill-name">C#</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-python-plain colored skill-logo"></i>
-                    <div class="skill-name">Python</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-javascript-plain colored skill-logo"></i>
-                    <div class="skill-name">JavaScript</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-java-plain colored skill-logo"></i>
-                    <div class="skill-name">Java</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-php-plain colored skill-logo"></i>
-                    <div class="skill-name">PHP</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Web Technologies -->
-        <div class="skill-category">
-            <h4><i class="fas fa-globe"></i> Web Technologies</h4>
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <i class="devicon-html5-plain colored skill-logo"></i>
-                    <div class="skill-name">HTML</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-css3-plain colored skill-logo"></i>
-                    <div class="skill-name">CSS</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-bootstrap-plain colored skill-logo"></i>
-                    <div class="skill-name">Bootstrap</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-jquery-plain colored skill-logo"></i>
-                    <div class="skill-name">jQuery</div>
-                </div>
-                <div class="skill-item">
-                    <i class="fas fa-bolt skill-logo" style="color: #ff6b6b;"></i>
-                    <div class="skill-name">Ajax</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-react-original colored skill-logo"></i>
-                    <div class="skill-name">React.js</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-express-original skill-logo" style="color: #68a063;"></i>
-                    <div class="skill-name">Express.js</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Version Control -->
-        <div class="skill-category">
-            <h4><i class="fas fa-code-branch"></i> Version Control</h4>
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <i class="devicon-git-plain colored skill-logo"></i>
-                    <div class="skill-name">Git</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-github-original skill-logo" style="color: #fff;"></i>
-                    <div class="skill-name">GitHub</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Operating Systems -->
-        <div class="skill-category">
-            <h4><i class="fas fa-desktop"></i> Operating Systems</h4>
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <i class="devicon-linux-plain skill-logo" style="color: #557C94;"></i>
-                    <div class="skill-name">Kali Linux</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-ubuntu-plain colored skill-logo"></i>
-                    <div class="skill-name">Ubuntu</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-linux-plain skill-logo" style="color: #16C0ED;"></i>
-                    <div class="skill-name">Parrot OS</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-archlinux-plain skill-logo" style="color: #1793D1;"></i>
-                    <div class="skill-name">BlackArch</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-windows8-original colored skill-logo"></i>
-                    <div class="skill-name">Windows</div>
-                </div>
-                <div class="skill-item">
-                    <i class="devicon-apple-original skill-logo" style="color: #fff;"></i>
-                    <div class="skill-name">macOS</div>
-                </div>
-            </div>
-        </div>
+<!-- ================= ABOUT ================= -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow">01 — About</div>
+      <h2 class="title">Offensive mindset, builder's hands.</h2>
+      <p class="subtitle">A short introduction to who I am, what I study and the kind of work I enjoy most.</p>
     </div>
+
+    <div class="about-grid">
+      <div class="reveal">
+        <p>
+          I'm <strong>Ankit Kumar</strong>, a <span class="highlight">BCA Cyber Security</span> student and
+          <span class="highlight">full-stack developer</span> from India. My curiosity started with a simple
+          question — <em>"how does this actually break?"</em> — and that question turned into a daily habit of
+          building applications and then auditing them like an attacker would.
+        </p>
+        <p>
+          On the defensive side I practise <strong>Vulnerability Assessment &amp; Penetration Testing (VAPT)</strong>,
+          web application security and the OWASP Top 10. On the building side I ship responsive, accessible
+          interfaces with vanilla <strong>HTML, CSS and JavaScript</strong>, and back them with Node and Python.
+          I live in the terminal — Linux is my daily driver and Bash is my duct tape.
+        </p>
+        <p>
+          I'm currently looking for <strong>internships, junior security roles and freelance web projects</strong>
+          where I can keep learning from people who are better than me. Outside of that you'll find me on CTF
+          platforms, reading disclosure write-ups, or shipping small tools to GitHub.
+        </p>
+
+        <dl class="info-list">
+          <div class="info-row"><dt>Name</dt><dd>Ankit Kumar</dd></div>
+          <div class="info-row"><dt>Education</dt><dd>BCA — Cyber Security (pursuing)</dd></div>
+          <div class="info-row"><dt>Focus</dt><dd>VAPT · Web Security · Full-Stack Development</dd></div>
+          <div class="info-row"><dt>Environment</dt><dd>Linux (Kali / Ubuntu) · VS Code · Git</dd></div>
+          <div class="info-row"><dt>Availability</dt><dd style="color:var(--brand)">Open to opportunities</dd></div>
+        </dl>
+      </div>
+
+      <div class="card focus-card reveal">
+        <div class="focus-item">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><h4>Vulnerability Assessment &amp; Pentesting</h4><p>Recon, enumeration, exploitation and clear remediation reporting for web targets.</p></div>
+        </div>
+        <div class="focus-item">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <div><h4>Full-Stack Web Development</h4><p>Semantic, responsive front-ends with vanilla JS; REST APIs and auth on the back-end.</p></div>
+        </div>
+        <div class="focus-item">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M6 8l3 2.5L6 13M11 13h5"/></svg></div>
+          <div><h4>Linux &amp; Automation</h4><p>Bash and Python scripts that remove the boring parts of recon and system admin work.</p></div>
+        </div>
+        <div class="focus-item">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.9 2.9M16.2 16.2l2.9 2.9M2 12h4M18 12h4M4.9 19.1l2.9-2.9M16.2 7.8l2.9-2.9"/></svg></div>
+          <div><h4>Security Tooling</h4><p>Small, focused utilities for scanning, reporting and speeding up assessments.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-    <!-- GitHub Stats Section -->
-    <section class="fade-in">
-        <div class="github-stats-section">
-            <div class="section-header">
-                <h2 class="section-title">GitHub Statistics</h2>
-            </div>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-code-branch"></i>
-                    </div>
-                    <div class="stat-number" id="totalRepos">0</div>
-                    <div class="stat-label">Total Repositories</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="stat-number" id="totalStars">0</div>
-                    <div class="stat-label">Total Stars</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="stat-number" id="totalFollowers">0</div>
-                    <div class="stat-label">Followers</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-user-friends"></i>
-                    </div>
-                    <div class="stat-number" id="totalFollowing">0</div>
-                    <div class="stat-label">Following</div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ================= SKILLS ================= -->
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow">02 — Skills</div>
+      <h2 class="title">My Technical Arsenal</h2>
+      <p class="subtitle">A comprehensive overview of programming languages, frameworks, tools and platforms I work with.</p>
+    </div>
 
-    <!-- Projects Section -->
-    <section id="projects" class="fade-in">
-        <div class="section-header">
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">Showcasing my work in security tools and automation</p>
+    <div class="skills-category reveal">
+      <h3 class="cat-title">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        Programming Languages
+      </h3>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C" width="48" height="48">
+          <span>C</span>
         </div>
-        <div id="projectsContainer">
-            <div class="loading">
-                <div class="loader"></div>
-            </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" width="48" height="48">
+          <span>C++</span>
         </div>
-    </section>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" width="48" height="48">
+          <span>C#</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" width="48" height="48">
+          <span>Python</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="48" height="48">
+          <span>JavaScript</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" width="48" height="48">
+          <span>Java</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" width="48" height="48">
+          <span>PHP</span>
+        </div>
+      </div>
+    </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="fade-in">
-        <div class="section-header">
-            <h2 class="section-title">Get In Touch</h2>
-            <p class="section-subtitle">Let's collaborate on exciting projects</p>
+    <div class="skills-category reveal">
+      <h3 class="cat-title">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/></svg>
+        Web Technologies
+      </h3>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" width="48" height="48">
+          <span>HTML5</span>
         </div>
-        <div class="contact-content">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fab fa-github"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h3>GitHub</h3>
-                        <p>@sudoankit404</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h3>Email</h3>
-                        <p>ankitkumar24273@gmail.com</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h3>Location</h3>
-                        <p>India</p>
-                    </div>
-                </div>
-                <div style="margin-top: 2rem;">
-                    <h3 style="margin-bottom: 1rem;">Connect With Me</h3>
-                    <div class="social-links">
-                        <a href="https://github.com/sudoankit404" class="social-link" target="_blank" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/shrmankt404" class="social-link" target="_blank" title="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://instagram.com/shrmankt" class="social-link" target="_blank" title="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="mailto:ankitkumar24273@gmail.com" class="social-link" title="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="contact-form">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Your Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        <i class="fas fa-paper-plane"></i> Send Message
-                    </button>
-                </form>
-            </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" width="48" height="48">
+          <span>CSS3</span>
         </div>
-    </section>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" width="48" height="48">
+          <span>Bootstrap</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg" alt="jQuery" width="48" height="48">
+          <span>jQuery</span>
+        </div>
+        <div class="tech-item">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 8v8M8 8v8"/></svg>
+          <span>Ajax</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React.js" width="48" height="48">
+          <span>React.js</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express.js" width="48" height="48">
+          <span>Express.js</span>
+        </div>
+      </div>
+    </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="#home">HOME</a>
-                <a href="#about">ABOUT</a>
-                <a href="#projects">PROJECTS</a>
-                <a href="#contact">CONTACT</a>
-                <a href="https://github.com/sudoankit404" target="_blank">GITHUB</a>
-            </div>
-            <p class="footer-text">
-                &copy; 2026 Ankit Kumar. Built with <i class="fas fa-heart" style="color: #f5576c;"></i> and <i class="fas fa-coffee" style="color: #22d3ee;"></i>
-            </p>
-            <p class="footer-text" style="margin-top: 0.5rem;">
-                Designed & Developed with passion for security and clean code
-            </p>
+    <div class="skills-category reveal">
+      <h3 class="cat-title">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6M5.6 5.6l4.2 4.2m4.4 4.4l4.2 4.2M1 12h6m6 0h6M5.6 18.4l4.2-4.2m4.4-4.4l4.2-4.2"/></svg>
+        Version Control
+      </h3>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" width="48" height="48">
+          <span>Git</span>
         </div>
-    </footer>
-    <script src="script.js"></script>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" width="48" height="48">
+          <span>GitHub</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="skills-category reveal">
+      <h3 class="cat-title">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M6 8l3 2.5L6 13M11 13h5"/></svg>
+        Operating Systems
+      </h3>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm7.8 16.5c-.3.5-.9.6-1.4.3-3.8-2.3-8.6-2.8-14.2-1.5-.6.1-1.1-.2-1.2-.7-.1-.6.2-1.1.7-1.2 6.1-1.4 11.4-.8 15.5 1.7.5.3.6.9.3 1.4zm2-4.4c-.4.6-1.1.8-1.7.4-4.3-2.6-10.9-3.4-16-1.8-.7.2-1.4-.2-1.6-.8-.2-.7.2-1.4.8-1.6 5.8-1.8 13.1-.9 18 2.1.6.4.8 1.1.4 1.7zm.2-4.6C17.1 4.7 9.9 4.6 5.8 5.3c-.8.2-1.6-.3-1.8-1.1-.2-.8.3-1.6 1.1-1.8 4.7-1 12.6-.8 17.5 2.1.7.4 1 1.3.6 2-.4.7-1.3 1-2 .6z"/></svg>
+          <span>Kali Linux</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-plain.svg" alt="Ubuntu" width="48" height="48">
+          <span>Ubuntu</span>
+        </div>
+        <div class="tech-item">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm0 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2zm-1 3v3.5l3 1.7V7.5L11 5zm-2 1.2L6 8.9v3.4l3-1.7V6.2zm6 0v3.4l3 1.7V8.9l-3-1.7zm-4 5.3l-3 1.7v3.4l3-1.7v-3.4zm2 0v3.4l3 1.7v-3.4l-3-1.7zm-1 5.8l3 1.7v-3.5l-3-1.7v3.5z"/></svg>
+          <span>Parrot OS</span>
+        </div>
+        <div class="tech-item">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5 17.3l-1.9-1.1c-.3.6-.8 1.1-1.4 1.4l.4 2.2c2.2-.7 3.8-2.4 4.5-4.5l-1.6-.9c-.2.6-.4 1.2-.7 1.8-.2.4-.5.8-.8 1.1l.4-.2c.1 0 .2-.1.3-.2.3-.3.6-.6.8-1zm-11-1.6l-.4-2.2c-2.2.7-3.8 2.4-4.5 4.5l1.6.9c.2-.6.4-1.2.7-1.8.2-.4.5-.8.8-1.1l-.4.2c-.1 0-.2.1-.3.2-.3.3-.6.6-.8 1l1.9 1.1c.3-.6.8-1.1 1.4-1.4zm-.7-6.4l1.9 1.1c.3-.6.8-1.1 1.4-1.4l-.4-2.2c-2.2.7-3.8 2.4-4.5 4.5l1.6.9c.2-.6.4-1.2.7-1.8.2-.4.5-.8.8-1.1l.4.2c.1 0 .2.1.3.2.3.3.6.6.8 1l-1.9-1.1c-.3.6-.8 1.1-1.4 1.4l.4 2.2c2.2-.7 3.8-2.4 4.5-4.5l-1.6-.9c-.2.6-.4 1.2-.7 1.8-.2.4-.5.8-.8 1.1l-.4-.2c-.1 0-.2-.1-.3-.2-.3-.3-.6-.6-.8-1z"/></svg>
+          <span>BlackArch</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" alt="Windows" width="48" height="48">
+          <span>Windows</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" alt="macOS" width="48" height="48">
+          <span>macOS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow">03 — Projects</div>
+      <h2 class="title">All My Repositories</h2>
+      <p class="subtitle">🔄 Automatically synced from GitHub — <span id="repoCount" style="color:var(--brand);font-weight:600">loading...</span></p>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;align-items:center;gap:1rem;margin-bottom:1.6rem" class="reveal">
+      <select id="sortSelect" style="padding:.5rem 1.2rem;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--text);font-size:.85rem;font-weight:500;cursor:pointer;font-family:inherit;min-height:38px">
+        <option value="updated">Recently updated</option>
+        <option value="stars">Most stars</option>
+        <option value="name">Name (A-Z)</option>
+      </select>
+    </div>
+
+    <div class="proj-grid" id="projGrid"></div>
+
+    <div id="repoDebug" style="margin-top:2rem;padding:1.5rem;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;font-family:'JetBrains Mono',monospace;font-size:.85rem;display:none"></div>
+
+    <div style="text-align:center;margin-top:2.4rem" class="reveal">
+      <a class="btn btn-ghost" href="https://github.com/sudoankit404?tab=repositories" target="_blank" rel="noopener">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.4-1.27.73-1.56-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+        View profile on GitHub
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </a>
+      <p style="color:var(--dim);font-size:.85rem;margin-top:1rem;font-family:'JetBrains Mono',monospace">
+        🔄 Auto-synced from GitHub — any new repository appears instantly
+      </p>
+      <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1rem">
+        <button class="btn btn-ghost" onclick="refreshRepos()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+          Refresh Repositories
+        </button>
+        <button class="btn btn-ghost" onclick="toggleDebug()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          Show Debug Info
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESUME ================= -->
+<section class="section" id="resume">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow">04 — Resume</div>
+      <h2 class="title">Credentials &amp; Professional Profile</h2>
+      <p class="subtitle">Complete CV with 15 professional certifications. Download as PDF or request via email.</p>
+    </div>
+
+    <div class="resume-shell-single">
+      <div class="reveal">
+        <div class="card" style="padding:clamp(1.3rem,3vw,1.8rem)">
+          <div class="mono" style="font-size:.76rem;color:var(--dim);letter-spacing:.14em;text-transform:uppercase">Curriculum Vitae</div>
+          <h3 style="font-size:1.45rem;font-weight:700;letter-spacing:-.02em;margin:.4rem 0 .2rem">Ankit Kumar</h3>
+          <p style="color:var(--brand);font-size:.9rem;font-weight:600">Cyber Security Student &amp; Full-Stack Developer</p>
+          <p style="color:var(--muted);font-size:.9rem;margin-top:.9rem">
+            Comprehensive resume with 15 professional certifications — ready to download as PDF or share via email.
+          </p>
+          <div class="resume-actions">
+            <button class="btn btn-primary" onclick="downloadResume()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download / Print PDF
+            </button>
+            <a class="btn btn-ghost" href="mailto:ankitkumar24273@gmail.com?subject=Opportunity%20for%20Ankit%20Kumar">Request via email</a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:1.1rem">
+          <h4 style="font-size:.82rem;text-transform:uppercase;letter-spacing:.14em;color:var(--dim);font-family:'JetBrains Mono',monospace;margin-bottom:1rem">Licenses &amp; Certifications
+            <span style="font-size:.7rem;color:var(--brand);font-weight:400;text-transform:none;letter-spacing:normal;margin-left:.5rem">(15)</span>
+          </h4>
+          <div class="cert-list">
+            <div class="cert">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+              <div><b>Certified Ethical Hacker (CEH)</b><span>EC-Council · Credential ID: CEH-XXXX-XXXX</span></div>
+            </div>
+            <div class="cert">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6M5.6 5.6l4.2 4.2m4.4 4.4l4.2 4.2M1 12h6m6 0h6M5.6 18.4l4.2-4.2m4.4-4.4l4.2-4.2"/></svg></span>
+              <div><b>CompTIA Security+</b><span>CompTIA · Network & information security fundamentals</span></div>
+            </div>
+            <div class="cert">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span>
+              <div><b>OWASP Top 10 Certification</b><span>OWASP Foundation · Web application security vulnerabilities</span></div>
+            </div>
+            <div class="cert">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M6 8l3 2.5L6 13M11 13h5"/></svg></span>
+              <div><b>Linux Professional Institute (LPIC-1)</b><span>LPI · Linux system administration certification</span></div>
+            </div>
+            <div class="cert">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+              <div><b>Full-Stack Web Development</b><span>Udemy · HTML, CSS, JavaScript, React, Node.js, MongoDB</span></div>
+            </div>
+            <div class="cert">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/></svg></span>
+              <div><b>Python for Everybody Specialization</b><span>Coursera · University of Michigan · Python programming</span></div>
+            </div>
+            <div class="cert">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg></span>
+              <div><b>Penetration Testing & Bug Bounty Hunting</b><span>Practical Ethical Hacking · TCM Security</span></div>
+            </div>
+            <div class="cert">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></span>
+              <div><b>Introduction to Cyber Security</b><span>Cisco Networking Academy · Security fundamentals</span></div>
+            </div>
+            <div class="cert">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></span>
+              <div><b>JavaScript Algorithms and Data Structures</b><span>freeCodeCamp · Advanced JavaScript & problem solving</span></div>
+            </div>
+            <div class="cert">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
+              <div><b>Networking Basics</b><span>Cisco · TCP/IP, routing, switching & network protocols</span></div>
+            </div>
+            <div class="cert">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+              <div><b>Cryptography and Network Security</b><span>NPTEL · IIT · Encryption, hashing & secure protocols</span></div>
+            </div>
+            <div class="cert">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+              <div><b>Git & GitHub Complete Course</b><span>Udemy · Version control & collaborative development</span></div>
+            </div>
+            <div class="cert">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></span>
+              <div><b>SQL for Data Science</b><span>Coursera · Database management & query optimization</span></div>
+            </div>
+            <div class="cert">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+              <div><b>Responsive Web Design</b><span>freeCodeCamp · Mobile-first design & CSS frameworks</span></div>
+            </div>
+            <div class="cert">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span>
+              <div><b>API Development and Security</b><span>Postman · RESTful APIs, authentication & testing</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow">05 — Contact</div>
+      <h2 class="title">Let's work together.</h2>
+      <p class="subtitle">Internships, security assessments, freelance websites or just a good technical conversation — my inbox is open.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="reveal">
+        <p style="color:var(--muted)">
+          I usually reply within 24–48 hours. For anything security related, please include scope and written
+          authorisation — I only test systems I'm permitted to test.
+        </p>
+        <div class="contact-methods">
+          <a class="cm" href="mailto:ankitkumar24273@gmail.com">
+            <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
+            <span><small>Email</small><b>ankitkumar24273@gmail.com</b></span>
+          </a>
+          <a class="cm" href="https://github.com/sudoankit404" target="_blank" rel="noopener">
+            <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.4-1.27.73-1.56-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg></span>
+            <span><small>GitHub</small><b>@sudoankit404</b></span>
+          </a>
+          <a class="cm" href="https://instagram.com/shrmankt" target="_blank" rel="noopener">
+            <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></span>
+            <span><small>Instagram</small><b>@shrmankt</b></span>
+          </a>
+          <a class="cm" href="https://www.linkedin.com/in/sudoankit404" target="_blank" rel="noopener">
+            <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.27a1.75 1.75 0 1 1 0-3.5 1.75 1.75 0 0 1 0 3.5zm13.5 12.27h-3v-5.6c0-3.37-4-3.11-4 0v5.6h-3v-11h3v1.77c1.4-2.59 7-2.78 7 2.47v6.76z"/></svg></span>
+            <span><small>LinkedIn</small><b>Connect with me</b></span>
+          </a>
+       
+      <form class="card reveal" id="contactForm" novalidate>
+        <div class="field">
+          <label for="cName">Your name</label>
+          <input id="cName" name="name" type="text" placeholder="Jane Doe" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="cEmail">Email address</label>
+          <input id="cEmail" name="email" type="email" placeholder="ankitkumar24273@gmail.com" required autocomplete="email" inputmode="email">
+        </div>
+        <div class="field">
+          <label for="cSubject">Subject</label>
+          <input id="cSubject" name="subject" type="text" placeholder="Internship / project enquiry">
+        </div>
+        <div class="field">
+          <label for="cMsg">Message</label>
+          <textarea id="cMsg" name="message" placeholder="Tell me a bit about what you need…" required></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit" style="width:100%">
+          Send message
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m22 2-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+        <p class="form-note">This opens your email client with the message pre-filled — no data is stored anywhere.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="yr">2026</span> Ankit Kumar. All rights reserved.</span>
+    <span class="mono">Built with HTML · CSS · JavaScript</span>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Back to top">
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<div class="toast" id="toast"></div>
+
+<!-- ============== PRINTABLE RESUME ============== -->
+<div id="resumeDoc">
+  <div class="r-doc">
+    <h1>ANKIT KUMAR</h1>
+    <div class="r-role">Cyber Security Student · Full-Stack Developer</div>
+    <div class="r-contact">
+      <span>sudoankit404@gmail.com</span><span>github.com/sudoankit404</span>
+      <span>linkedin.com/in/sudoankit404</span><span>India</span>
+    </div>
+    <hr>
+
+    <h2>Professional Summary</h2>
+    <p>BCA (Cyber Security) student and full-stack developer with hands-on experience in Vulnerability Assessment &amp; Penetration Testing (VAPT), web application security and responsive front-end development. Comfortable in Linux environments, skilled with industry-standard security tooling, and experienced in delivering production websites for real clients. Seeking an internship or junior role in cyber security or web development.</p>
+
+    <h2>Education</h2>
+    <h3>Bachelor of Computer Applications (BCA) — Cyber Security</h3>
+    <div class="r-meta">2024 – Present</div>
+    <ul>
+      <li>Core coursework: computer networks, operating systems, DBMS, programming fundamentals, cryptography and information security.</li>
+      <li>Continuous practical lab work in ethical hacking, Linux administration and secure application development.</li>
+    </ul>
+
+    <h2>Experience</h2>
+    <h3>Freelance Web Developer — Self-employed</h3>
+    <div class="r-meta">Remote · Present</div>
+    <ul>
+      <li>Designed and delivered responsive, mobile-first websites for small businesses using vanilla HTML, CSS and JavaScript.</li>
+      <li>Built and deployed the Evolution Dance Centre website (multi-page, portfolio showcase, services and contact modules).</li>
+      <li>Optimised page performance, accessibility and cross-device compatibility; deployed via GitHub Pages.</li>
+    </ul>
+    <h3>Independent Security Researcher</h3>
+    <div class="r-meta">Personal labs &amp; CTF platforms · Present</div>
+    <ul>
+      <li>Perform end-to-end VAPT on intentionally vulnerable web applications: reconnaissance, enumeration, exploitation and remediation reporting.</li>
+      <li>Test against the OWASP Top 10 including injection, broken authentication, XSS and access-control flaws.</li>
+      <li>Develop Python and Bash utilities that automate reconnaissance and reporting workflows.</li>
+    </ul>
+
+    <h2>Technical Skills</h2>
+    <div class="r-two">
+      <div><b>Programming Languages:</b> C, C++, C#, Python, JavaScript, Java, PHP</div>
+      <div><b>Web Technologies:</b> HTML5, CSS3, Bootstrap, jQuery, Ajax, React.js, Express.js</div>
+      <div><b>Version Control:</b> Git, GitHub</div>
+      <div><b>Operating Systems:</b> Kali Linux, Ubuntu, Parrot OS, BlackArch, Windows, macOS</div>
+      <div><b>Security Tools:</b> Burp Suite, Nmap, Wireshark, Metasploit, Nikto, Hydra, John the Ripper</div>
+      <div><b>Specializations:</b> VAPT, OWASP Top 10, Web Application Security, Network Scanning, Penetration Testing</div>
+    </div>
+
+    <h2>Selected Projects</h2>
+    <ul>
+      <li><b>Personal Portfolio Website</b> — Responsive portfolio with live GitHub API integration, dynamic project filtering, dark/light theming and typing animations. Vanilla HTML/CSS/JS.</li>
+      <li><b>Evolution Dance Centre Website</b> — Multi-page website for a dance academy featuring portfolio showcase, class listings, services and contact sections. HTML, CSS, JavaScript.</li>
+      <li><b>Security Tooling &amp; Lab Work</b> — Python/Bash scripts for automated reconnaissance, scanning and structured vulnerability reporting.</li>
+    </ul>
+
+    <h2>Licenses &amp; Certifications</h2>
+    <ul style="column-count:2;column-gap:18pt">
+      <li>Certified Ethical Hacker (CEH) — EC-Council</li>
+      <li>CompTIA Security+ — CompTIA</li>
+      <li>OWASP Top 10 Certification — OWASP Foundation</li>
+      <li>Linux Professional Institute (LPIC-1) — LPI</li>
+      <li>Full-Stack Web Development — Udemy</li>
+      <li>Python for Everybody Specialization — Coursera</li>
+      <li>Penetration Testing &amp; Bug Bounty Hunting — TCM Security</li>
+      <li>Introduction to Cyber Security — Cisco Networking Academy</li>
+      <li>JavaScript Algorithms and Data Structures — freeCodeCamp</li>
+      <li>Networking Basics — Cisco</li>
+      <li>Cryptography and Network Security — NPTEL</li>
+      <li>Git &amp; GitHub Complete Course — Udemy</li>
+      <li>SQL for Data Science — Coursera</li>
+      <li>Responsive Web Design — freeCodeCamp</li>
+      <li>API Development and Security — Postman</li>
+    </ul>
+
+    <h2>Strengths</h2>
+    <p>Attacker mindset paired with builder discipline · clear technical documentation · fast self-learner · strong command-line fluency · committed to responsible, ethical security practice.</p>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

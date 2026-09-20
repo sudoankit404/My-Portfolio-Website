@@ -265,13 +265,7 @@ html[data-theme="light"] .tech-item img[src*="github"]{filter:invert(1)}
 .tech-item span{font-size:.88rem;font-weight:550;color:var(--text)}
 
 /* ---------- Projects ---------- */
-.filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.6rem}
-.filter{
-  padding:.5rem 1rem;border-radius:99px;border:1px solid var(--line);background:var(--surface);
-  color:var(--muted);font-size:.85rem;font-weight:500;cursor:pointer;transition:.2s;min-height:38px;
-}
-.filter:hover{color:var(--text);border-color:var(--line-strong)}
-.filter.active{background:var(--brand);color:#04121a;border-color:transparent}
+
 .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.1rem}
 .proj{display:flex;flex-direction:column;min-height:230px}
 .proj-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:1rem}
@@ -372,6 +366,7 @@ footer{border-top:1px solid var(--line);padding:2.2rem 0;margin-top:2rem}
   .hero-cta .btn{flex:1 1 100%}
   .info-row dt{min-width:100%}
   .foot{justify-content:center;text-align:center}
+  #sortSelect{width:100%;max-width:100%}
 }
 @media (hover:none){
   .card:hover,.btn:hover,.cm:hover{transform:none}

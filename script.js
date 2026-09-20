@@ -173,7 +173,7 @@ document.getElementById('contactForm').addEventListener('submit',e=>{
   if(!name||!email||!msg){showToast('Please fill in your name, email and message.');return;}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showToast('That email address looks invalid.');return;}
   const body=encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${msg}`);
-  window.location.href=`mailto:sudoankit404@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+  window.location.href=`mailto:ankitkumar24273@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
   showToast('Thanks, '+name.split(' ')[0]+'! Your email client is opening…');
   f.reset();
 });

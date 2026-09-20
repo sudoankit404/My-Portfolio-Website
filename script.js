@@ -85,33 +85,31 @@ barIO.observe(document.getElementById('bars'));
 
 /* ---------------- GitHub API ---------------- */
 const USER='sudoankit404';
-const FALLBACK=[
-  {name:'My-Portfolio-Website',description:'Personal portfolio website showcasing cybersecurity projects and web development skills. Live GitHub API integration, typing animations, responsive design and dynamic project filtering.',language:'JavaScript',stargazers_count:1,forks_count:0,html_url:'https://github.com/sudoankit404/My-Portfolio-Website',homepage:'https://sudoankit404.github.io/My-Portfolio-Website/',topics:['portfolio','web']},
-  {name:'Evolution-Dance-Centre-Website-',description:'Official website for Evolution Dance Centre — a bold, creative dance academy website with portfolio showcase, dance forms, services and contact info.',language:'HTML',stargazers_count:1,forks_count:0,html_url:'https://github.com/sudoankit404/Evolution-Dance-Centre-Website-',homepage:'',topics:['website','client']}
-];
-let repos=[],filter='all';
+let repos=[],sortBy='updated';
 
-function classify(r){
-  const t=((r.name||'')+' '+(r.description||'')+' '+(r.topics||[]).join(' ')).toLowerCase();
-  if(/secur|hack|pentest|vapt|scan|exploit|ctf|crypt/.test(t))return 'security';
-  if(/tool|script|automat|cli|bot|python|bash/.test(t))return 'tool';
-  return 'web';
-}
 function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 
-function skeletons(n){
-  document.getElementById('projGrid').innerHTML=Array.from({length:n}).map(()=>`
-    <article class="card proj">
-      <div class="proj-top"><div class="skeleton" style="width:42px;height:34px"></div><div class="skeleton" style="width:56px;height:18px"></div></div>
-      <h3 class="skeleton" style="width:70%;height:20px"></h3>
-      <p class="skeleton" style="height:58px;margin-top:.6rem"></p>
-      <div class="proj-meta"><span class="skeleton" style="width:110px;height:14px"></span></div>
-    </article>`).join('');
+
+function sortRepos(list){
+  if(sortBy==='stars')return [...list].sort((a,b)=>(b.stargazers_count-a.stargazers_count)||(new Date(b.pushed_at)-new Date(a.pushed_at)));
+  if(sortBy==='updated')return [...list].sort((a,b)=>new Date(b.pushed_at)-new Date(a.pushed_at));
+  if(sortBy==='name')return [...list].sort((a,b)=>a.name.localeCompare(b.name));
+  return list;
 }
+
 function render(){
   const grid=document.getElementById('projGrid');
-  const list=repos.filter(r=>filter==='all'||classify(r)===filter);
-  if(!list.length){grid.innerHTML='<p style="color:var(--muted)">No projects in this category yet — more coming soon.</p>';return;}
+  let list=sortRepos(repos);
+  
+  console.log(`🎨 Rendering ${list.length} repositories (sorted by: ${sortBy})`);
+  console.log('Repository names:', list.map(r=>r.name).join(', '));
+  
+  if(!list.length){
+    console.warn('⚠️ No repositories to display!');
+    grid.innerHTML='<p style="color:var(--muted);grid-column:1/-1;text-align:center;padding:2rem">No repositories found.</p>';
+    return;
+  }
+  
   grid.innerHTML=list.map(r=>`
     <article class="card proj">
       <div class="proj-top">
@@ -125,33 +123,218 @@ function render(){
       <p>${esc(r.description||'No description provided for this repository yet.')}</p>
       <div class="proj-meta">
         ${r.language?`<span><span class="lang-dot"></span>${esc(r.language)}</span>`:''}
-        <span>★ ${r.stargazers_count||0}</span>
-        <span>⑂ ${r.forks_count||0}</span>
-        <span style="color:var(--brand)">${classify(r)}</span>
+        <span title="Stars">★ ${r.stargazers_count||0}</span>
+        <span title="Forks">⑂ ${r.forks_count||0}</span>
+        ${r.pushed_at?`<span title="Last updated">🕐 ${timeAgo(r.pushed_at)}</span>`:''}
       </div>
     </article>`).join('');
 }
-skeletons(4);
+
+function timeAgo(date){
+  const seconds=Math.floor((new Date()-new Date(date))/1000);
+  const intervals=[
+    {label:'year',seconds:31536000},
+    {label:'month',seconds:2592000},
+    {label:'day',seconds:86400},
+    {label:'hour',seconds:3600},
+    {label:'minute',seconds:60}
+  ];
+  for(const interval of intervals){
+    const count=Math.floor(seconds/interval.seconds);
+    if(count>=1)return count===1?`1 ${interval.label} ago`:`${count} ${interval.label}s ago`;
+  }
+  return 'just now';
+}
+// Show loading state
+const countEl=document.getElementById('repoCount');
+if(countEl)countEl.innerHTML='<span style="opacity:.7">fetching repositories...</span>';
+document.getElementById('projGrid').innerHTML=`
+  <div style="grid-column:1/-1;text-align:center;padding:3rem 1rem">
+    <div style="font-size:2rem;margin-bottom:1rem">📡</div>
+    <p style="color:var(--muted);font-size:1rem">Loading repositories from GitHub...</p>
+  </div>
+`;
+
+// Fetch ALL repositories from GitHub API
 (async()=>{
   try{
-    const r=await fetch(`https://api.github.com/users/${USER}/repos?per_page=100&sort=updated`).then(x=>x.ok?x.json():null);
+    console.log('🔄 Fetching repositories from GitHub API...');
+    const response=await fetch(`https://api.github.com/users/${USER}/repos?per_page=100&sort=updated`);
     
-    if(Array.isArray(r)&&r.length>0){
-      repos=r.filter(x=>!x.fork&&!x.private).sort((a,b)=>(b.stargazers_count-a.stargazers_count)||(new Date(b.pushed_at)-new Date(a.pushed_at)));
+    if(!response.ok){
+      throw new Error(`GitHub API returned ${response.status}: ${response.statusText}`);
+    }
+    
+    const data=await response.json();
+    
+    if(Array.isArray(data)&&data.length>0){
+      // Get ALL repos - both public and private ones that are accessible
+      const allRepos=data.filter(x=>!x.fork);
+      repos=allRepos;
+      
+      console.log(`✅ Successfully loaded ${repos.length} repositories from GitHub API`);
+      console.log('📦 All Repository Names:', repos.map(r=>r.name).join(', '));
+      console.log('📊 Full Repository Data:', repos);
+      console.table(repos.map(r=>({
+        name:r.name,
+        language:r.language,
+        stars:r.stargazers_count,
+        forks:r.forks_count,
+        private:r.private,
+        fork:r.fork
+      })));
+      
+      // Update repo count with live data
+      if(countEl){
+        const now=new Date();
+        const time=now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+        countEl.innerHTML=`${repos.length} ${repos.length===1?'repository':'repositories'} <span style="opacity:.6;font-weight:400">· auto-synced at ${time}</span>`;
+      }
+      
+      // Render all repositories
+      render();
+      
+      // Show success message
+      if(repos.length>0){
+        console.log(`✨ Successfully displaying all ${repos.length} repositories!`);
+      }else{
+        console.warn('⚠️ No repositories found to display!');
+      }
+      
     } else {
-      repos=FALLBACK;
+      throw new Error('No repositories found');
+    }
+    
+  }catch(error){
+    console.error('❌ GitHub API Error:',error);
+    
+    // Show error state
+    if(countEl){
+      countEl.innerHTML='<span style="color:var(--danger)">Failed to fetch repositories</span>';
+    }
+    
+    document.getElementById('projGrid').innerHTML=`
+      <div style="grid-column:1/-1;text-align:center;padding:3rem 1rem">
+        <div style="font-size:2rem;margin-bottom:1rem">⚠️</div>
+        <p style="color:var(--muted);font-size:1rem;margin-bottom:.5rem">Unable to load repositories from GitHub</p>
+        <p style="color:var(--dim);font-size:.85rem">Error: ${error.message}</p>
+        <button class="btn btn-ghost" onclick="location.reload()" style="margin-top:1.5rem">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+          Retry
+        </button>
+      </div>
+    `;
+  }
+})();
+document.getElementById('sortSelect').addEventListener('change',e=>{
+  sortBy=e.target.value;
+  render();
+});
+
+/* ========== Auto-Refresh Repositories ========== */
+async function refreshRepos(){
+  const countEl=document.getElementById('repoCount');
+  const btn=event?.target?.closest('button');
+  
+  if(btn){
+    btn.disabled=true;
+    btn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/></svg> Refreshing...';
+  }
+  
+  if(countEl)countEl.innerHTML='<span style="opacity:.7">refreshing...</span>';
+  
+  try{
+    const response=await fetch(`https://api.github.com/users/${USER}/repos?per_page=100&sort=updated&_=${Date.now()}`);
+    if(!response.ok)throw new Error('Failed to fetch');
+    
+    const data=await response.json();
+    repos=data.filter(x=>!x.fork);
+    
+    const now=new Date();
+    const time=now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+    if(countEl)countEl.innerHTML=`${repos.length} ${repos.length===1?'repository':'repositories'} <span style="opacity:.6;font-weight:400">· synced at ${time}</span>`;
+    
+    render();
+    console.log(`✅ Refreshed: ${repos.length} repositories`);
+    
+    if(btn){
+      btn.disabled=false;
+      btn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/></svg> Refresh Repositories';
+    }
+  }catch(error){
+    console.error('Refresh failed:',error);
+    if(countEl)countEl.innerHTML='<span style="color:var(--danger)">Refresh failed</span>';
+    if(btn){
+      btn.disabled=false;
+      btn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/></svg> Retry';
+    }
+  }
+}
+
+/* ========== Auto-Refresh Every 5 Minutes ========== */
+setInterval(async()=>{
+  console.log('⏰ Auto-refreshing repositories...');
+  try{
+    const response=await fetch(`https://api.github.com/users/${USER}/repos?per_page=100&sort=updated&_=${Date.now()}`);
+    if(response.ok){
+      const data=await response.json();
+      const newCount=data.filter(x=>!x.fork).length;
+      const oldCount=repos.length;
+      
+      repos=data.filter(x=>!x.fork);
+      
+      if(newCount!==oldCount){
+        console.log(`🔔 Repository count changed: ${oldCount} → ${newCount}`);
+        const now=new Date();
+        const time=now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+        const countEl=document.getElementById('repoCount');
+        if(countEl){
+          countEl.innerHTML=`${repos.length} ${repos.length===1?'repository':'repositories'} <span style="opacity:.6;font-weight:400">· auto-updated at ${time}</span>`;
+          // Flash effect to show update
+          countEl.style.animation='flash 0.5s ease';
+          setTimeout(()=>countEl.style.animation='',500);
+        }
+        render();
+        showToast(newCount>oldCount?`🎉 New repository detected! Now showing ${newCount} repositories.`:`Repository count updated: ${newCount} repositories`);
+      }else{
+        console.log(`✓ No changes (${repos.length} repositories)`);
+      }
     }
   }catch(e){
-    console.warn('GitHub API error:',e);
-    repos=FALLBACK;
+    console.warn('Auto-refresh failed:',e);
   }
-  render();
-})();
-document.getElementById('filters').addEventListener('click',e=>{
-  const b=e.target.closest('.filter');if(!b)return;
-  document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');filter=b.dataset.f;render();
-});
+},5*60*1000); // Every 5 minutes
+
+// Add CSS for animations
+const style=document.createElement('style');
+style.textContent=`
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes flash{0%,100%{opacity:1}50%{opacity:.3;color:var(--brand)}}
+`;
+document.head.appendChild(style);
+
+/* ========== Debug Panel ========== */
+function toggleDebug(){
+  const panel=document.getElementById('repoDebug');
+  if(!panel)return;
+  
+  if(panel.style.display==='none'){
+    panel.style.display='block';
+    panel.innerHTML=`
+      <h4 style="margin-bottom:1rem;color:var(--brand)">🔍 Debug Information</h4>
+      <p><strong>Total repositories loaded:</strong> ${repos.length}</p>
+      <p><strong>Current sort:</strong> ${sortBy}</p>
+      <p><strong>Repository names:</strong></p>
+      <ul style="margin-left:1.5rem;margin-top:.5rem">
+        ${repos.map(r=>`<li>${r.name} (${r.language||'No language'}) - ⭐${r.stargazers_count} - ${r.private?'Private':'Public'}</li>`).join('')}
+      </ul>
+      <p style="margin-top:1rem"><strong>API Endpoint:</strong> https://api.github.com/users/${USER}/repos</p>
+      <p><strong>Browser console:</strong> Press F12 to see detailed logs</p>
+    `;
+  }else{
+    panel.style.display='none';
+  }
+}
 
 /* ---------------- Resume download ---------------- */
 function downloadResume(){

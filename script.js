@@ -51,7 +51,7 @@ addEventListener('scroll',()=>{
 },{passive:true});
 
 /* ---------------- Typing ---------------- */
-const roles=['Cyber Security Student','Full-Stack Developer','Aspiring Ethical Hacker','Linux Explorer 🐧','VAPT Practitioner'];
+const roles=['Cyber Security Enthusiast','Full-Stack Developer','Aspiring Ethical Hacker','Linux Explorer 🐧','VAPT Practitioner'];
 const typedEl=document.getElementById('typed');
 let ri=0,ci=0,del=false;
 (function type(){

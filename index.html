@@ -14,6 +14,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -51,11 +53,11 @@
 </header>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#about"><span class="num">01</span> ABOUT</a>
-  <a href="#skills"><span class="num">02</span> SKILLS</a>
-  <a href="#projects"><span class="num">03</span> PROJECTS</a>
-  <a href="#resume"><span class="num">04</span> RESUME</a>
-  <a href="#contact"><span class="num">05</span> CONTACT</a>
+  <a href="#about"><span class="num"></span> ABOUT</a>
+  <a href="#skills"><span class="num"></span> SKILLS</a>
+  <a href="#projects"><span class="num"></span> PROJECTS</a>
+  <a href="#resume"><span class="num"></span> RESUME</a>
+  <a href="#contact"><span class="num"></span> CONTACT</a>
   <button class="btn btn-primary" onclick="downloadResume()">Download Resume (PDF)</button>
 </div>
 
@@ -64,13 +66,13 @@
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <span class="status"><span class="dot"></span> Available for internships &amp; freelance</span>
-        <h1>Ankit Kumar<br><span class="grad">Cyber Security &amp; Code.</span></h1>
+        <span class="status"><span class="dot"></span> Available for Internships &amp; Freelance</span>
+        <h1 style=" font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">ANKIT KUMAR<br><span class="grad">Cyber Security &amp; Code.</span></h1>
         <div class="role"><span id="typed"></span><span class="caret"></span></div>
         <p class="lede">
-          BCA Cyber Security student building secure, well-engineered web applications —
+          BCA - Cyber Security Student building secure, well-engineered Web Applications —
           and breaking them on purpose to learn how they fail. I work across
-          <strong style="color:var(--text)">web development, VAPT and Linux tools</strong>.
+          <strong style="color:var(--text)">Web Development, VAPT and Linux Tools</strong>.
         </p>
         <div class="hero-cta">
           <a href="#projects" class="btn btn-primary">
@@ -126,13 +128,13 @@
       <div class="reveal">
         <p>
           I'm <strong>Ankit Kumar</strong>, a <span class="highlight">BCA Cyber Security</span> student and
-          <span class="highlight">full-stack developer</span> from India. My curiosity started with a simple
-          question — <em>"how does this actually break?"</em> — and that question turned into a daily habit of
+          <span class="highlight">full-stack developer</span> from New Delhi, India. My curiosity started with a simple
+          question — <em>"How does this actually break?"</em> — and that question turned into a daily habit of
           building applications and then auditing them like an attacker would.
         </p>
         <p>
           On the defensive side I practise <strong>Vulnerability Assessment &amp; Penetration Testing (VAPT)</strong>,
-          web application security and the OWASP Top 10. On the building side I ship responsive, accessible
+          Web Application Security and the OWASP Top 10. On the building side I ship responsive, accessible
           interfaces with vanilla <strong>HTML, CSS and JavaScript</strong>, and back them with Node and Python.
           I live in the terminal — Linux is my daily driver and Bash is my duct tape.
         </p>
@@ -147,7 +149,7 @@
           <div class="info-row"><dt>Education</dt><dd>BCA — Cyber Security Graduate</dd></div>
           <div class="info-row"><dt>Focus</dt><dd>VAPT · Web Security · Full-Stack Development</dd></div>
           <div class="info-row"><dt>Environment</dt><dd>Linux (Kali / Ubuntu) · VS Code · Git</dd></div>
-          <div class="info-row"><dt>Availability</dt><dd style="color:var(--brand)">Open to opportunities</dd></div>
+          <div class="info-row"><dt>Availability</dt><dd style="color:var(--brand)">Open to Opportunities</dd></div>
         </dl>
       </div>
 
@@ -280,19 +282,19 @@
       </h3>
       <div class="tech-grid">
         <div class="tech-item">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm7.8 16.5c-.3.5-.9.6-1.4.3-3.8-2.3-8.6-2.8-14.2-1.5-.6.1-1.1-.2-1.2-.7-.1-.6.2-1.1.7-1.2 6.1-1.4 11.4-.8 15.5 1.7.5.3.6.9.3 1.4zm2-4.4c-.4.6-1.1.8-1.7.4-4.3-2.6-10.9-3.4-16-1.8-.7.2-1.4-.2-1.6-.8-.2-.7.2-1.4.8-1.6 5.8-1.8 13.1-.9 18 2.1.6.4.8 1.1.4 1.7zm.2-4.6C17.1 4.7 9.9 4.6 5.8 5.3c-.8.2-1.6-.3-1.8-1.1-.2-.8.3-1.6 1.1-1.8 4.7-1 12.6-.8 17.5 2.1.7.4 1 1.3.6 2-.4.7-1.3 1-2 .6z"/></svg>
+          <img src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/kali-linux/default.svg" alt="Kali Linux" width="45" height="45"/>
           <span>Kali Linux</span>
         </div>
         <div class="tech-item">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-plain.svg" alt="Ubuntu" width="48" height="48">
+          <i class="devicon-ubuntu-plain colored skill-logo" alt="Ubuntu" width="48" height="48"></i>
           <span>Ubuntu</span>
         </div>
         <div class="tech-item">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm0 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2zm-1 3v3.5l3 1.7V7.5L11 5zm-2 1.2L6 8.9v3.4l3-1.7V6.2zm6 0v3.4l3 1.7V8.9l-3-1.7zm-4 5.3l-3 1.7v3.4l3-1.7v-3.4zm2 0v3.4l3 1.7v-3.4l-3-1.7zm-1 5.8l3 1.7v-3.5l-3-1.7v3.5z"/></svg>
+          <i class="devicon-linux-plain skill-logo" alt="ParrotOS" style="color: #16C0ED;"></i>
           <span>Parrot OS</span>
         </div>
         <div class="tech-item">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5 17.3l-1.9-1.1c-.3.6-.8 1.1-1.4 1.4l.4 2.2c2.2-.7 3.8-2.4 4.5-4.5l-1.6-.9c-.2.6-.4 1.2-.7 1.8-.2.4-.5.8-.8 1.1l.4-.2c.1 0 .2-.1.3-.2.3-.3.6-.6.8-1zm-11-1.6l-.4-2.2c-2.2.7-3.8 2.4-4.5 4.5l1.6.9c.2-.6.4-1.2.7-1.8.2-.4.5-.8.8-1.1l-.4.2c-.1 0-.2.1-.3.2-.3.3-.6.6-.8 1l1.9 1.1c.3-.6.8-1.1 1.4-1.4zm-.7-6.4l1.9 1.1c.3-.6.8-1.1 1.4-1.4l-.4-2.2c-2.2.7-3.8 2.4-4.5 4.5l1.6.9c.2-.6.4-1.2.7-1.8.2-.4.5-.8.8-1.1l.4.2c.1 0 .2.1.3.2.3.3.6.6.8 1l-1.9-1.1c-.3.6-.8 1.1-1.4 1.4l.4 2.2c2.2-.7 3.8-2.4 4.5-4.5l-1.6-.9c-.2.6-.4 1.2-.7 1.8-.2.4-.5.8-.8 1.1l-.4-.2c-.1 0-.2-.1-.3-.2-.3-.3-.6-.6-.8-1z"/></svg>
+          <i class="devicon-archlinux-plain skill-logo" alt="BlackArch" style="color: #1793D1;"></i>
           <span>BlackArch</span>
         </div>
         <div class="tech-item">
@@ -300,7 +302,7 @@
           <span>Windows</span>
         </div>
         <div class="tech-item">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" alt="macOS" width="48" height="48">
+          <i class="devicon-apple-original skill-logo" alt="macOS" width="48" height="48" style="color: #fff;"></i>
           <span>macOS</span>
         </div>
       </div>
@@ -463,7 +465,7 @@
     <div class="contact-grid">
       <div class="reveal">
         <p style="color:var(--muted)">
-          I usually reply within 24–48 hours. For anything security related, please include scope and written
+          For anything security related, Please include scope and written
           authorisation — I only test systems I'm permitted to test.
         </p>
         <div class="contact-methods">
@@ -522,7 +524,7 @@
   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </button>
 
-<div class="toast" id="toast"></div>
+<!-- <div class="toast" id="toast"></div> -->
 
 <!-- ============== PRINTABLE RESUME ============== -->
 <div id="resumeDoc">
@@ -581,11 +583,11 @@
 
     <h2>Licenses &amp; Certifications</h2>
     <ul style="column-count:2;column-gap:18pt">
-      <li>Certified Ethical Hacker (CEH) — EC-Council</li>
-      <li>CompTIA Security+ — CompTIA</li>
-      <li>OWASP Top 10 Certification — OWASP Foundation</li>
-      <li>Linux Professional Institute (LPIC-1) — LPI</li>
-      <li>Full-Stack Web Development — Udemy</li>
+      <li>BCA - Gurugram University</li>
+      <li>Ethical Hacker Essentials (EHE) — EC-Council</li>
+      <li>Google Cloud Cyber Security Certificate — Google Cloud</li>
+      <li>Mitigate Threats and vulnerabilities with Security Command Center Skill Badge - Google Cloud</li>
+      <li>Prompt Design in Vertex AI Skills Badge — Google Cloud</li>
       <li>Python for Everybody Specialization — Coursera</li>
       <li>Penetration Testing &amp; Bug Bounty Hunting — TCM Security</li>
       <li>Introduction to Cyber Security — Cisco Networking Academy</li>
@@ -603,6 +605,6 @@
   </div>
 </div>
 
-<script src="script.js"></script>
+<script src="ankithu.js"></script>
 </body>
 </html>

@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="gobar.css">
 </head>
 <body>
 <div class="bg-grid"></div>
@@ -127,8 +127,8 @@
     <div class="about-grid">
       <div class="reveal">
         <p>
-          I'm <strong>Ankit Kumar</strong>, a <span class="highlight">BCA Cyber Security</span> student and
-          <span class="highlight">full-stack developer</span> from New Delhi, India. My curiosity started with a simple
+          I'm <strong>Ankit Kumar</strong>, a <span class="highlight">BCA Cyber Security</span> Enthusiast and
+          <span class="highlight">Full-Stack Developer</span> from New Delhi, India. My curiosity started with a simple
           question — <em>"How does this actually break?"</em> — and that question turned into a daily habit of
           building applications and then auditing them like an attacker would.
         </p>
@@ -174,6 +174,24 @@
     </div>
   </div>
 </section>
+
+ <!-- Projects -->
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="head reveal">
+        <div class="eyebrow">03 — Projects</div>
+        <h2 class="title">All My Repositories</h2>
+        <p class="subtitle" id="repoCount">🔄 Automatically synced from GitHub — loading...</p>
+      </div>
+
+      <div class="proj-grid reveal" id="projGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:3rem 1rem">
+          <div style="font-size:2rem;margin-bottom:1rem">📡</div>
+          <p style="color:var(--muted);font-size:1rem">Loading repositories from GitHub...</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
 <!-- ================= SKILLS ================= -->
 <section class="section" id="skills">
@@ -354,32 +372,35 @@
   </div>
 </section>
 
-<!-- ================= RESUME ================= -->
-<section class="section" id="resume">
-  <div class="wrap">
-    <div class="head reveal">
-      <div class="eyebrow">04 — Resume</div>
-      <h2 class="title">Credentials &amp; Professional Profile</h2>
-      <p class="subtitle">Complete CV with 15 professional certifications. Download as PDF or request via email.</p>
-    </div>
+<!-- Resume -->
+  <section class="section" id="resume">
+    <div class="wrap">
+      <div class="head reveal">
+        <div class="eyebrow">04 — Resume</div>
+        <h2 class="title">Credentials & Professional Profile</h2>
+        <p class="subtitle">Complete CV with 15 professional certifications. Download as PDF or request via email.</p>
+      </div>
 
-    <div class="resume-shell-single">
       <div class="reveal">
-        <div class="card" style="padding:clamp(1.3rem,3vw,1.8rem)">
-          <div class="mono" style="font-size:.76rem;color:var(--dim);letter-spacing:.14em;text-transform:uppercase">Curriculum Vitae</div>
-          <h3 style="font-size:1.45rem;font-weight:700;letter-spacing:-.02em;margin:.4rem 0 .2rem">Ankit Kumar</h3>
-          <p style="color:var(--brand);font-size:.9rem;font-weight:600">Cyber Security Student &amp; Full-Stack Developer</p>
-          <p style="color:var(--muted);font-size:.9rem;margin-top:.9rem">
-            Comprehensive resume with 15 professional certifications — ready to download as PDF or share via email.
-          </p>
-          <div class="resume-actions">
-            <button class="btn btn-primary" onclick="downloadResume()">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Download / Print PDF
-            </button>
-            <a class="btn btn-ghost" href="mailto:ankitkumar24273@gmail.com?subject=Opportunity%20for%20Ankit%20Kumar">Request via email</a>
+        <div class="resume-card">
+          <div class="resume-header">
+            <h3>Curriculum Vitae</h3>
+            <div class="sub">Ankit Kumar</div>
+            <p class="mono" style="color:var(--dim);font-size:.88rem">Cyber Security Student & Full-Stack Developer</p>
+            <p>
+              Comprehensive resume with 15 professional certifications — ready to download as PDF or share via email.
+            </p>
+            <div class="resume-actions">
+              <button class="btn btn-primary" id="downloadBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download Resume
+              </button>
+              <a href="mailto:sudoankit404@gmail.com" class="btn btn-ghost">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Request via Email
+              </a>
+            </div>
           </div>
-        </div>
 
         <div class="card" style="margin-top:1.1rem">
           <h4 style="font-size:.82rem;text-transform:uppercase;letter-spacing:.14em;color:var(--dim);font-family:'JetBrains Mono',monospace;margin-bottom:1rem">Licenses &amp; Certifications
@@ -388,31 +409,31 @@
           <div class="cert-list">
             <div class="cert">
               <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-              <div><b>Ethical Hacker Essentials (EHE)</b><span>Coursera · EC-Council · Credential ID: </span></div>
+              <div><b>Ethical Hacker Essentials (EHE)</b><span>Coursera · EC-Council </span></div>
             </div>
             <div class="cert">
               <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6M5.6 5.6l4.2 4.2m4.4 4.4l4.2 4.2M1 12h6m6 0h6M5.6 18.4l4.2-4.2m4.4-4.4l4.2-4.2"/></svg></span>
-              <div><b>CompTIA Security+</b><span>CompTIA · Network & information security fundamentals</span></div>
+              <div><b>Full-Stack Web Development</b><span>GDF Skills Institute</span></div>
             </div>
             <div class="cert">
               <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span>
-              <div><b>OWASP Top 10 Certification</b><span>OWASP Foundation · Web application security vulnerabilities</span></div>
+              <div><b>Cyber Security Certificate</b><span>Google Cloud</span></div>
             </div>
             <div class="cert">
               <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M6 8l3 2.5L6 13M11 13h5"/></svg></span>
-              <div><b>Linux Professional Institute (LPIC-1)</b><span>LPI · Linux system administration certification</span></div>
+              <div><b>Manages Kubernetes in Google Cloud Skill Badge</b><span>Google Cloud</span></div>
             </div>
             <div class="cert">
               <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
-              <div><b>Full-Stack Web Development</b><span>Udemy · HTML, CSS, JavaScript, React, Node.js, MongoDB</span></div>
+              <div><b>Get Started with Pub/Sub Skill Badge</b><span>Google Cloud</span></div>
             </div>
             <div class="cert">
               <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/></svg></span>
-              <div><b>Python for Everybody Specialization</b><span>Coursera · University of Michigan · Python programming</span></div>
+              <div><b>Mitigates Threats and Vulnerabilities with Security Command Center Skill Badge</b><span>Google Cloud</span></div>
             </div>
             <div class="cert">
               <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg></span>
-              <div><b>Penetration Testing & Bug Bounty Hunting</b><span>Practical Ethical Hacking · TCM Security</span></div>
+              <div><b>Prompt Design in Vertex AI Skill Badge</b><span>Google Cloud</span></div>
             </div>
             <div class="cert">
               <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></span>
@@ -605,6 +626,6 @@
   </div>
 </div>
 
-<script src="script.js"></script>
+<script src="gobar.js"></script>
 </body>
 </html>

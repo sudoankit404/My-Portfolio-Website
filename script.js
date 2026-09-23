@@ -189,7 +189,6 @@ function renderRepos(){
     </article>`).join('');
 }
 
-// Initialize - fetch all repositories
 fetchAllRepos();
 
 /* ---------------- Resume Download ---------------- */
@@ -198,12 +197,8 @@ document.getElementById('downloadBtn').addEventListener('click', downloadResume)
 document.getElementById('navResume').addEventListener('click', downloadResume);
 
 function downloadResume() {
-  // NOTE: To add your actual PDF resume:
-  // 1. Upload your resume.pdf file to your GitHub repository
-  // 2. Replace 'YOUR_RESUME_URL' below with the actual URL
-  // Example: 'https://raw.githubusercontent.com/sudoankit404/My-Portfolio-Website/main/resume.pdf'
   
-  const resumeURL = 'Ankit resume.pdf'; // Replace this with your actual resume URL
+  const resumeURL = 'Ankit resume.pdf'; 
   
   if (resumeURL && resumeURL !== 'Ankit resume.pdf') {
     // Download from URL
@@ -223,7 +218,7 @@ function downloadResume() {
 function generateDefaultResume() {
   const resumeContent = `
 ANKIT KUMAR
-Cyber Security Student · Full-Stack Developer
+Cyber Security Enthusiast · Full-Stack Developer
 sudoankit404@gmail.com | github.com/sudoankit404 | linkedin.com/in/sudoankit404 | India
 
 PROFESSIONAL SUMMARY
@@ -231,7 +226,7 @@ BCA (Cyber Security) student and full-stack developer with hands-on experience i
 
 EDUCATION
 Bachelor of Computer Applications (BCA) — Cyber Security
-2024 – Present
+2023 – 2026
 • Core coursework: computer networks, operating systems, DBMS, programming fundamentals, cryptography and information security.
 • Continuous practical lab work in ethical hacking, Linux administration and secure application development.
 

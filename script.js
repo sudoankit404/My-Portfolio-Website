@@ -83,34 +83,93 @@ const barIO=new IntersectionObserver(es=>{
 },{threshold:.3});
 barIO.observe(document.getElementById('bars'));
 
-/* ---------------- GitHub API ---------------- */
+/* ---------------- GitHub API - Fetch ALL Repositories ---------------- */
 const USER='sudoankit404';
-let repos=[],sortBy='updated';
+let repos=[];
 
-function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function esc(s){return (s||'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 
-
-function sortRepos(list){
-  if(sortBy==='stars')return [...list].sort((a,b)=>(b.stargazers_count-a.stargazers_count)||(new Date(b.pushed_at)-new Date(a.pushed_at)));
-  if(sortBy==='updated')return [...list].sort((a,b)=>new Date(b.pushed_at)-new Date(a.pushed_at));
-  if(sortBy==='name')return [...list].sort((a,b)=>a.name.localeCompare(b.name));
-  return list;
+function timeAgo(date){
+  const seconds=Math.floor((new Date()-new Date(date))/1000);
+  const intervals=[
+    {label:'year',seconds:31536000},
+    {label:'month',seconds:2592000},
+    {label:'day',seconds:86400},
+    {label:'hour',seconds:3600},
+    {label:'minute',seconds:60}
+  ];
+  for(const interval of intervals){
+    const count=Math.floor(seconds/interval.seconds);
+    if(count>=1)return count===1?`1 ${interval.label} ago`:`${count} ${interval.label}s ago`;
+  }
+  return 'just now';
 }
 
-function render(){
+async function fetchAllRepos(){
   const grid=document.getElementById('projGrid');
-  let list=sortRepos(repos);
+  const countEl=document.getElementById('repoCount');
   
-  console.log(`🎨 Rendering ${list.length} repositories (sorted by: ${sortBy})`);
-  console.log('Repository names:', list.map(r=>r.name).join(', '));
+  try {
+    console.log(`📡 Fetching all repositories for user: ${USER}`);
+    
+    // Fetch with pagination to get ALL repositories
+    let page = 1;
+    let allRepos = [];
+    let hasMore = true;
+    
+    while(hasMore) {
+      const response = await fetch(`https://api.github.com/users/${USER}/repos?per_page=100&page=${page}&sort=updated`);
+      
+      if(!response.ok) {
+        throw new Error(`GitHub API error: ${response.status}`);
+      }
+      
+      const pageRepos = await response.json();
+      
+      if(pageRepos.length === 0) {
+        hasMore = false;
+      } else {
+        allRepos = allRepos.concat(pageRepos);
+        page++;
+      }
+    }
+    
+    repos = allRepos;
+    console.log(`✅ Successfully fetched ${repos.length} repositories`);
+    
+    if(countEl) {
+      countEl.innerHTML = `<span style="color:var(--brand)">${repos.length} repositories</span> automatically synced from GitHub`;
+    }
+    
+    renderRepos();
+    
+  } catch(error) {
+    console.error('❌ Error fetching repositories:', error);
+    grid.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;padding:3rem 1rem">
+        <div style="font-size:2rem;margin-bottom:1rem">⚠️</div>
+        <p style="color:var(--danger);font-size:1rem;margin-bottom:.5rem">Failed to load repositories</p>
+        <p style="color:var(--dim);font-size:.9rem">${esc(error.message)}</p>
+      </div>
+    `;
+    if(countEl) {
+      countEl.innerHTML = '<span style="color:var(--danger)">Error loading repositories</span>';
+    }
+  }
+}
+
+function renderRepos(){
+  const grid=document.getElementById('projGrid');
   
-  if(!list.length){
-    console.warn('⚠️ No repositories to display!');
+  if(!repos.length){
     grid.innerHTML='<p style="color:var(--muted);grid-column:1/-1;text-align:center;padding:2rem">No repositories found.</p>';
     return;
   }
   
-  grid.innerHTML=list.map(r=>`
+  // Sort by most recently updated
+  const sortedRepos = [...repos].sort((a,b)=>new Date(b.pushed_at)-new Date(a.pushed_at));
+  
+  grid.innerHTML=sortedRepos.map(r=>`
     <article class="card proj">
       <div class="proj-top">
         <span class="folder"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>
@@ -130,217 +189,107 @@ function render(){
     </article>`).join('');
 }
 
-function timeAgo(date){
-  const seconds=Math.floor((new Date()-new Date(date))/1000);
-  const intervals=[
-    {label:'year',seconds:31536000},
-    {label:'month',seconds:2592000},
-    {label:'day',seconds:86400},
-    {label:'hour',seconds:3600},
-    {label:'minute',seconds:60}
-  ];
-  for(const interval of intervals){
-    const count=Math.floor(seconds/interval.seconds);
-    if(count>=1)return count===1?`1 ${interval.label} ago`:`${count} ${interval.label}s ago`;
-  }
-  return 'just now';
-}
-// Show loading state
-const countEl=document.getElementById('repoCount');
-if(countEl)countEl.innerHTML='<span style="opacity:.7">fetching repositories...</span>';
-document.getElementById('projGrid').innerHTML=`
-  <div style="grid-column:1/-1;text-align:center;padding:3rem 1rem">
-    <div style="font-size:2rem;margin-bottom:1rem">📡</div>
-    <p style="color:var(--muted);font-size:1rem">Loading repositories from GitHub...</p>
-  </div>
-`;
+// Initialize - fetch all repositories
+fetchAllRepos();
 
-// Fetch ALL repositories from GitHub API
-(async()=>{
-  try{
-    console.log('🔄 Fetching repositories from GitHub API...');
-    const response=await fetch(`https://api.github.com/users/${USER}/repos?per_page=100&sort=updated`);
-    
-    if(!response.ok){
-      throw new Error(`GitHub API returned ${response.status}: ${response.statusText}`);
-    }
-    
-    const data=await response.json();
-    
-    if(Array.isArray(data)&&data.length>0){
-      // Get ALL repos - both public and private ones that are accessible
-      const allRepos=data.filter(x=>!x.fork);
-      repos=allRepos;
-      
-      console.log(`✅ Successfully loaded ${repos.length} repositories from GitHub API`);
-      console.log('📦 All Repository Names:', repos.map(r=>r.name).join(', '));
-      console.log('📊 Full Repository Data:', repos);
-      console.table(repos.map(r=>({
-        name:r.name,
-        language:r.language,
-        stars:r.stargazers_count,
-        forks:r.forks_count,
-        private:r.private,
-        fork:r.fork
-      })));
-      
-      // Update repo count with live data
-      if(countEl){
-        const now=new Date();
-        const time=now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-        countEl.innerHTML=`${repos.length} ${repos.length===1?'repository':'repositories'} <span style="opacity:.6;font-weight:400">· auto-synced at ${time}</span>`;
-      }
-      
-      // Render all repositories
-      render();
-      
-      // Show success message
-      if(repos.length>0){
-        console.log(`✨ Successfully displaying all ${repos.length} repositories!`);
-      }else{
-        console.warn('⚠️ No repositories found to display!');
-      }
-      
-    } else {
-      throw new Error('No repositories found');
-    }
-    
-  }catch(error){
-    console.error('❌ GitHub API Error:',error);
-    
-    // Show error state
-    if(countEl){
-      countEl.innerHTML='<span style="color:var(--danger)">Failed to fetch repositories</span>';
-    }
-    
-    document.getElementById('projGrid').innerHTML=`
-      <div style="grid-column:1/-1;text-align:center;padding:3rem 1rem">
-        <div style="font-size:2rem;margin-bottom:1rem">⚠️</div>
-        <p style="color:var(--muted);font-size:1rem;margin-bottom:.5rem">Unable to load repositories from GitHub</p>
-        <p style="color:var(--dim);font-size:.85rem">Error: ${error.message}</p>
-        <button class="btn btn-ghost" onclick="location.reload()" style="margin-top:1.5rem">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
-          Retry
-        </button>
-      </div>
-    `;
-  }
-})();
-document.getElementById('sortSelect').addEventListener('change',e=>{
-  sortBy=e.target.value;
-  render();
-});
+/* ---------------- Resume Download ---------------- */
+// Download Resume
+document.getElementById('downloadBtn').addEventListener('click', downloadResume);
+document.getElementById('navResume').addEventListener('click', downloadResume);
 
-/* ========== Auto-Refresh Repositories ========== */
-async function refreshRepos(){
-  const countEl=document.getElementById('repoCount');
-  const btn=event?.target?.closest('button');
+function downloadResume() {
+  // NOTE: To add your actual PDF resume:
+  // 1. Upload your resume.pdf file to your GitHub repository
+  // 2. Replace 'YOUR_RESUME_URL' below with the actual URL
+  // Example: 'https://raw.githubusercontent.com/sudoankit404/My-Portfolio-Website/main/resume.pdf'
   
-  if(btn){
-    btn.disabled=true;
-    btn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/></svg> Refreshing...';
-  }
+  const resumeURL = 'Ankit resume.pdf'; // Replace this with your actual resume URL
   
-  if(countEl)countEl.innerHTML='<span style="opacity:.7">refreshing...</span>';
-  
-  try{
-    const response=await fetch(`https://api.github.com/users/${USER}/repos?per_page=100&sort=updated&_=${Date.now()}`);
-    if(!response.ok)throw new Error('Failed to fetch');
-    
-    const data=await response.json();
-    repos=data.filter(x=>!x.fork);
-    
-    const now=new Date();
-    const time=now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-    if(countEl)countEl.innerHTML=`${repos.length} ${repos.length===1?'repository':'repositories'} <span style="opacity:.6;font-weight:400">· synced at ${time}</span>`;
-    
-    render();
-    console.log(`✅ Refreshed: ${repos.length} repositories`);
-    
-    if(btn){
-      btn.disabled=false;
-      btn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/></svg> Refresh Repositories';
-    }
-  }catch(error){
-    console.error('Refresh failed:',error);
-    if(countEl)countEl.innerHTML='<span style="color:var(--danger)">Refresh failed</span>';
-    if(btn){
-      btn.disabled=false;
-      btn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/></svg> Retry';
-    }
+  if (resumeURL && resumeURL !== 'Ankit resume.pdf') {
+    // Download from URL
+    const link = document.createElement('a');
+    link.href = resumeURL;
+    link.download = 'Ankit resume.pdf';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } else {
+    // Generate a text resume as fallback
+    generateDefaultResume();
   }
 }
 
-/* ========== Auto-Refresh Every 5 Minutes ========== */
-setInterval(async()=>{
-  console.log('⏰ Auto-refreshing repositories...');
-  try{
-    const response=await fetch(`https://api.github.com/users/${USER}/repos?per_page=100&sort=updated&_=${Date.now()}`);
-    if(response.ok){
-      const data=await response.json();
-      const newCount=data.filter(x=>!x.fork).length;
-      const oldCount=repos.length;
-      
-      repos=data.filter(x=>!x.fork);
-      
-      if(newCount!==oldCount){
-        console.log(`🔔 Repository count changed: ${oldCount} → ${newCount}`);
-        const now=new Date();
-        const time=now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-        const countEl=document.getElementById('repoCount');
-        if(countEl){
-          countEl.innerHTML=`${repos.length} ${repos.length===1?'repository':'repositories'} <span style="opacity:.6;font-weight:400">· auto-updated at ${time}</span>`;
-          // Flash effect to show update
-          countEl.style.animation='flash 0.5s ease';
-          setTimeout(()=>countEl.style.animation='',500);
-        }
-        render();
-        showToast(newCount>oldCount?`🎉 New repository detected! Now showing ${newCount} repositories.`:`Repository count updated: ${newCount} repositories`);
-      }else{
-        console.log(`✓ No changes (${repos.length} repositories)`);
-      }
-    }
-  }catch(e){
-    console.warn('Auto-refresh failed:',e);
-  }
-},5*60*1000); // Every 5 minutes
+function generateDefaultResume() {
+  const resumeContent = `
+ANKIT KUMAR
+Cyber Security Student · Full-Stack Developer
+sudoankit404@gmail.com | github.com/sudoankit404 | linkedin.com/in/sudoankit404 | India
 
-// Add CSS for animations
-const style=document.createElement('style');
-style.textContent=`
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes flash{0%,100%{opacity:1}50%{opacity:.3;color:var(--brand)}}
-`;
-document.head.appendChild(style);
+PROFESSIONAL SUMMARY
+BCA (Cyber Security) student and full-stack developer with hands-on experience in Vulnerability Assessment & Penetration Testing (VAPT), web application security and responsive front-end development. Comfortable in Linux environments, skilled with industry-standard security tooling, and experienced in delivering production websites for real clients. Seeking an internship or junior role in cyber security or web development.
 
-/* ========== Debug Panel ========== */
-function toggleDebug(){
-  const panel=document.getElementById('repoDebug');
-  if(!panel)return;
-  
-  if(panel.style.display==='none'){
-    panel.style.display='block';
-    panel.innerHTML=`
-      <h4 style="margin-bottom:1rem;color:var(--brand)">🔍 Debug Information</h4>
-      <p><strong>Total repositories loaded:</strong> ${repos.length}</p>
-      <p><strong>Current sort:</strong> ${sortBy}</p>
-      <p><strong>Repository names:</strong></p>
-      <ul style="margin-left:1.5rem;margin-top:.5rem">
-        ${repos.map(r=>`<li>${r.name} (${r.language||'No language'}) - ⭐${r.stargazers_count} - ${r.private?'Private':'Public'}</li>`).join('')}
-      </ul>
-      <p style="margin-top:1rem"><strong>API Endpoint:</strong> https://api.github.com/users/${USER}/repos</p>
-      <p><strong>Browser console:</strong> Press F12 to see detailed logs</p>
-    `;
-  }else{
-    panel.style.display='none';
-  }
-}
+EDUCATION
+Bachelor of Computer Applications (BCA) — Cyber Security
+2024 – Present
+• Core coursework: computer networks, operating systems, DBMS, programming fundamentals, cryptography and information security.
+• Continuous practical lab work in ethical hacking, Linux administration and secure application development.
 
-/* ---------------- Resume download ---------------- */
-function downloadResume(){
-  toggleMenu(false);
-  showToast('Opening print dialog — choose “Save as PDF”.');
-  setTimeout(()=>window.print(),400);
+EXPERIENCE
+Freelance Web Developer — Self-employed
+Remote · Present
+• Designed and delivered responsive, mobile-first websites for small businesses using vanilla HTML, CSS and JavaScript.
+• Built and deployed the Evolution Dance Centre website (multi-page, portfolio showcase, services and contact modules).
+• Optimised page performance, accessibility and cross-device compatibility; deployed via GitHub Pages.
+
+Independent Security Researcher
+Personal labs & CTF platforms · Present
+• Perform end-to-end VAPT on intentionally vulnerable web applications: reconnaissance, enumeration, exploitation and remediation reporting.
+• Test against the OWASP Top 10 including injection, broken authentication, XSS and access-control flaws.
+• Develop Python and Bash utilities that automate reconnaissance and reporting workflows.
+
+TECHNICAL SKILLS
+Programming Languages: C, C++, C#, Python, JavaScript, Java, PHP
+Web Technologies: HTML5, CSS3, Bootstrap, jQuery, Ajax, React.js, Express.js
+Version Control: Git, GitHub
+Operating Systems: Kali Linux, Ubuntu, Parrot OS, BlackArch, Windows, macOS
+Security Tools: Burp Suite, Nmap, Wireshark, Metasploit, Nikto, Hydra, John the Ripper
+Specializations: VAPT, OWASP Top 10, Web Application Security, Network Scanning, Penetration Testing
+
+SELECTED PROJECTS
+• Personal Portfolio Website — Responsive portfolio with live GitHub API integration, dynamic project filtering, dark/light theming and typing animations. Vanilla HTML/CSS/JS.
+• Evolution Dance Centre Website — Multi-page website for a dance academy featuring portfolio showcase, class listings, services and contact sections. HTML, CSS, JavaScript.
+• Security Tooling & Lab Work — Python/Bash scripts for automated reconnaissance, scanning and structured vulnerability reporting.
+
+LICENSES & CERTIFICATIONS
+• Ethical Hacker Essentials (EHE) — EC-Council
+• CompTIA Security+ — CompTIA
+• OWASP Top 10 Certification — OWASP Foundation
+• Linux Professional Institute (LPIC-1) — LPI
+• Full-Stack Web Development — Udemy
+• Python for Everybody Specialization — Coursera
+• Penetration Testing & Bug Bounty Hunting — TCM Security
+• Introduction to Cyber Security — Cisco Networking Academy
+• JavaScript Algorithms and Data Structures — freeCodeCamp
+• Networking Basics — Cisco
+• Cryptography and Network Security — NPTEL
+• Git & GitHub Complete Course — Udemy
+• SQL for Data Science — Coursera
+• Responsive Web Design — freeCodeCamp
+• API Development and Security — Postman
+
+STRENGTHS
+Attacker mindset paired with builder discipline · clear technical documentation · fast self-learner · strong command-line fluency · committed to responsible, ethical security practice.
+  `;
+
+  const blob = new Blob([resumeContent], { type: 'text/plain' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'Ankit resume.pdf';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(link.href);
 }
 
 /* ---------------- Contact form ---------------- */

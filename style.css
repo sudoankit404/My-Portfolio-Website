@@ -307,6 +307,18 @@ html[data-theme="light"] .tech-item img[src*="github"]{filter:invert(1)}
 .cert b{display:block;font-size:.92rem;font-weight:600}
 .cert span{font-size:.8rem;color:var(--dim)}
 
+/* ---------- Education ---------- */
+.education-container{position:relative;margin-bottom:2.5rem}
+.education-grid{display:grid;grid-template-columns:1fr;gap:1.3rem}
+.education-year{
+  font-size:.75rem;color:var(--brand);font-family:'JetBrains Mono',monospace;
+  padding:.35rem .7rem;background:var(--brand-soft);border-radius:6px;font-weight:600;
+}
+.education-specialization{
+  font-size:.88rem;color:var(--brand);font-weight:600;margin-bottom:.3rem;
+}
+.education-university{font-size:.85rem;color:var(--dim);margin-bottom:.8rem;font-family:'JetBrains Mono',monospace}
+
 /* ---------- Contact ---------- */
 .contact-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(28px,5vw,52px);align-items:start}
 .contact-methods{display:grid;gap:.7rem;margin-top:1.6rem}

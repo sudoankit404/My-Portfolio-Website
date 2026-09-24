@@ -83,114 +83,65 @@ const barIO=new IntersectionObserver(es=>{
 },{threshold:.3});
 barIO.observe(document.getElementById('bars'));
 
-/* ---------------- GitHub API - Fetch ALL Repositories ---------------- */
-const USER='sudoankit404';
-let repos=[];
-
-function esc(s){return (s||'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-
-function timeAgo(date){
-  const seconds=Math.floor((new Date()-new Date(date))/1000);
-  const intervals=[
-    {label:'year',seconds:31536000},
-    {label:'month',seconds:2592000},
-    {label:'day',seconds:86400},
-    {label:'hour',seconds:3600},
-    {label:'minute',seconds:60}
-  ];
-  for(const interval of intervals){
-    const count=Math.floor(seconds/interval.seconds);
-    if(count>=1)return count===1?`1 ${interval.label} ago`:`${count} ${interval.label}s ago`;
+/* ---------------- Projects - Hardcoded ---------------- */
+const projects = [
+  {
+    name: 'URLScanner Pro',
+    description: 'Advanced URL security scanner with comprehensive threat detection, malware analysis, and real-time safety reports. Built with modern web technologies for fast and accurate scanning.',
+    url: 'https://github.com/sudoankit404/URLScanner-Pro',
+    demo: null,
+    language: 'Python',
+    tags: ['Security', 'Web Scanner', 'Threat Detection']
+  },
+  {
+    name: 'Evolution Dance Centre Website',
+    description: 'Multi-page responsive website for a dance academy featuring portfolio showcase, class listings, services and contact sections. Built with vanilla HTML, CSS, and JavaScript.',
+    url: 'https://github.com/sudoankit404/Evolution-Dance-Centre-Website-',
+    demo: 'https://sudoankit404.github.io/Evolution-Dance-Centre-Website-/',
+    language: 'HTML',
+    tags: ['Web Development', 'Responsive Design', 'Portfolio']
+  },
+  {
+    name: 'My Portfolio Website',
+    description: 'Personal portfolio website showcasing cybersecurity projects and web development skills. Features live GitHub API integration, typing animations, responsive design, and dynamic project filtering.',
+    url: 'https://github.com/sudoankit404/My-Portfolio-Website',
+    demo: 'https://sudoankit404.github.io/My-Portfolio-Website/',
+    language: 'JavaScript',
+    tags: ['Portfolio', 'Web Development', 'Responsive']
   }
-  return 'just now';
-}
+];
 
-async function fetchAllRepos(){
+function renderProjects(){
   const grid=document.getElementById('projGrid');
   const countEl=document.getElementById('repoCount');
   
-  try {
-    console.log(`📡 Fetching all repositories for user: ${USER}`);
-    
-    // Fetch with pagination to get ALL repositories
-    let page = 1;
-    let allRepos = [];
-    let hasMore = true;
-    
-    while(hasMore) {
-      const response = await fetch(`https://api.github.com/users/${USER}/repos?per_page=100&page=${page}&sort=updated`);
-      
-      if(!response.ok) {
-        throw new Error(`GitHub API error: ${response.status}`);
-      }
-      
-      const pageRepos = await response.json();
-      
-      if(pageRepos.length === 0) {
-        hasMore = false;
-      } else {
-        allRepos = allRepos.concat(pageRepos);
-        page++;
-      }
-    }
-    
-    repos = allRepos;
-    console.log(`✅ Successfully fetched ${repos.length} repositories`);
-    
-    if(countEl) {
-      countEl.innerHTML = `<span style="color:var(--brand)">${repos.length} repositories</span> automatically synced from GitHub`;
-    }
-    
-    renderRepos();
-    
-  } catch(error) {
-    console.error('❌ Error fetching repositories:', error);
-    grid.innerHTML = `
-      <div style="grid-column:1/-1;text-align:center;padding:3rem 1rem">
-        <div style="font-size:2rem;margin-bottom:1rem">⚠️</div>
-        <p style="color:var(--danger);font-size:1rem;margin-bottom:.5rem">Failed to load repositories</p>
-        <p style="color:var(--dim);font-size:.9rem">${esc(error.message)}</p>
-      </div>
-    `;
-    if(countEl) {
-      countEl.innerHTML = '<span style="color:var(--danger)">Error loading repositories</span>';
-    }
-  }
-}
-
-function renderRepos(){
-  const grid=document.getElementById('projGrid');
-  
-  if(!repos.length){
-    grid.innerHTML='<p style="color:var(--muted);grid-column:1/-1;text-align:center;padding:2rem">No repositories found.</p>';
-    return;
+  if(countEl) {
+    countEl.innerHTML = `<span style="color:var(--brand)">${projects.length} featured projects</span> showcasing my work`;
   }
   
-  // Sort by most recently updated
-  const sortedRepos = [...repos].sort((a,b)=>new Date(b.pushed_at)-new Date(a.pushed_at));
-  
-  grid.innerHTML=sortedRepos.map(r=>`
+  grid.innerHTML = projects.map(project => `
     <article class="card proj">
       <div class="proj-top">
         <span class="folder"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>
         <span class="proj-links">
-          ${r.homepage?`<a href="${esc(r.homepage)}" target="_blank" rel="noopener" aria-label="Live demo"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14 21 3"/></svg></a>`:''}
-          <a href="${esc(r.html_url)}" target="_blank" rel="noopener" aria-label="Source code"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.4-1.27.73-1.56-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg></a>
+          ${project.demo ? `<a href="${project.demo}" target="_blank" rel="noopener" aria-label="Live demo"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14 21 3"/></svg></a>` : ''}
+          <a href="${project.url}" target="_blank" rel="noopener" aria-label="Source code"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.4-1.27.73-1.56-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg></a>
         </span>
       </div>
-      <h3><a href="${esc(r.html_url)}" target="_blank" rel="noopener">${esc(r.name.replace(/-$/,'').replace(/-/g,' '))}</a></h3>
-      <p>${esc(r.description||'No description provided for this repository yet.')}</p>
+      <h3><a href="${project.url}" target="_blank" rel="noopener">${project.name}</a></h3>
+      <p>${project.description}</p>
       <div class="proj-meta">
-        ${r.language?`<span><span class="lang-dot"></span>${esc(r.language)}</span>`:''}
-        <span title="Stars">★ ${r.stargazers_count||0}</span>
-        <span title="Forks">⑂ ${r.forks_count||0}</span>
-        ${r.pushed_at?`<span title="Last updated">🕐 ${timeAgo(r.pushed_at)}</span>`:''}
+        ${project.language ? `<span><span class="lang-dot"></span>${project.language}</span>` : ''}
+        ${project.tags.map(tag => `<span>${tag}</span>`).join('')}
       </div>
-    </article>`).join('');
+    </article>
+  `).join('');
+  
+  console.log(`✅ Rendered ${projects.length} projects`);
 }
 
-fetchAllRepos();
-
+// Initialize - render projects immediately
+renderProjects();
 /* ---------------- Resume Download ---------------- */
 // Download Resume
 document.getElementById('downloadBtn').addEventListener('click', downloadResume);

@@ -283,7 +283,6 @@ html[data-theme="light"] .tech-item img[src*="github"]{filter:invert(1)}
 .proj-meta{display:flex;flex-wrap:wrap;gap:.85rem;font-size:.8rem;color:var(--dim);font-family:'JetBrains Mono',monospace}
 .proj-meta span{display:flex;align-items:center;gap:.35rem}
 .lang-dot{width:10px;height:10px;border-radius:50%;background:var(--brand)}
-
 /* ---------- Resume ---------- */
 .resume-card{
   background:linear-gradient(135deg,var(--surface),var(--surface-2));

@@ -149,89 +149,22 @@ document.getElementById('navResume').addEventListener('click', downloadResume);
 
 function downloadResume() {
   
-  const resumeURL = 'Ankit resume.pdf'; 
+  const resumeURL = 'Ankit-resume.pdf'; 
   
-  if (resumeURL && resumeURL !== 'Ankit resume.pdf') {
+  if (resumeURL && resumeURL !== 'Ankit-resume.pdf') {
     // Download from URL
     const link = document.createElement('a');
     link.href = resumeURL;
-    link.download = 'Ankit resume.pdf';
+    link.download = 'Ankit-resume.pdf';
     link.target = '_blank';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  } else {
-    // Generate a text resume as fallback
-    generateDefaultResume();
-  }
-}
-
-function generateDefaultResume() {
-  const resumeContent = `
-ANKIT KUMAR
-Cyber Security Enthusiast · Full-Stack Developer
-sudoankit404@gmail.com | github.com/sudoankit404 | linkedin.com/in/sudoankit404 | India
-
-PROFESSIONAL SUMMARY
-BCA (Cyber Security) student and full-stack developer with hands-on experience in Vulnerability Assessment & Penetration Testing (VAPT), web application security and responsive front-end development. Comfortable in Linux environments, skilled with industry-standard security tooling, and experienced in delivering production websites for real clients. Seeking an internship or junior role in cyber security or web development.
-
-EDUCATION
-Bachelor of Computer Applications (BCA) — Cyber Security
-2023 – 2026
-• Core coursework: computer networks, operating systems, DBMS, programming fundamentals, cryptography and information security.
-• Continuous practical lab work in ethical hacking, Linux administration and secure application development.
-
-EXPERIENCE
-Freelance Web Developer — Self-employed
-Remote · Present
-• Designed and delivered responsive, mobile-first websites for small businesses using vanilla HTML, CSS and JavaScript.
-• Built and deployed the Evolution Dance Centre website (multi-page, portfolio showcase, services and contact modules).
-• Optimised page performance, accessibility and cross-device compatibility; deployed via GitHub Pages.
-
-Independent Security Researcher
-Personal labs & CTF platforms · Present
-• Perform end-to-end VAPT on intentionally vulnerable web applications: reconnaissance, enumeration, exploitation and remediation reporting.
-• Test against the OWASP Top 10 including injection, broken authentication, XSS and access-control flaws.
-• Develop Python and Bash utilities that automate reconnaissance and reporting workflows.
-
-TECHNICAL SKILLS
-Programming Languages: C, C++, C#, Python, JavaScript, Java, PHP
-Web Technologies: HTML5, CSS3, Bootstrap, jQuery, Ajax, React.js, Express.js
-Version Control: Git, GitHub
-Operating Systems: Kali Linux, Ubuntu, Parrot OS, BlackArch, Windows, macOS
-Security Tools: Burp Suite, Nmap, Wireshark, Metasploit, Nikto, Hydra, John the Ripper
-Specializations: VAPT, OWASP Top 10, Web Application Security, Network Scanning, Penetration Testing
-
-SELECTED PROJECTS
-• Personal Portfolio Website — Responsive portfolio with live GitHub API integration, dynamic project filtering, dark/light theming and typing animations. Vanilla HTML/CSS/JS.
-• Evolution Dance Centre Website — Multi-page website for a dance academy featuring portfolio showcase, class listings, services and contact sections. HTML, CSS, JavaScript.
-• Security Tooling & Lab Work — Python/Bash scripts for automated reconnaissance, scanning and structured vulnerability reporting.
-
-LICENSES & CERTIFICATIONS
-• Ethical Hacker Essentials (EHE) — EC-Council
-• CompTIA Security+ — CompTIA
-• OWASP Top 10 Certification — OWASP Foundation
-• Linux Professional Institute (LPIC-1) — LPI
-• Full-Stack Web Development — Udemy
-• Python for Everybody Specialization — Coursera
-• Penetration Testing & Bug Bounty Hunting — TCM Security
-• Introduction to Cyber Security — Cisco Networking Academy
-• JavaScript Algorithms and Data Structures — freeCodeCamp
-• Networking Basics — Cisco
-• Cryptography and Network Security — NPTEL
-• Git & GitHub Complete Course — Udemy
-• SQL for Data Science — Coursera
-• Responsive Web Design — freeCodeCamp
-• API Development and Security — Postman
-
-STRENGTHS
-Attacker mindset paired with builder discipline · clear technical documentation · fast self-learner · strong command-line fluency · committed to responsible, ethical security practice.
-  `;
-
+  } 
   const blob = new Blob([resumeContent], { type: 'text/plain' });
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
-  link.download = 'Ankit resume.pdf';
+  link.download = 'Ankit-resume.pdf';
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
